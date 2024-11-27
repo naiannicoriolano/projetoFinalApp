@@ -1,35 +1,75 @@
-import React, { useState } from 'react';
-import { View, Text, Button, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Home() {
-  const navigation = useNavigation(); 
+export default function CurriculosCriados() {
   const [curriculos, setCurriculos] = useState([]);
+  const navigation = useNavigation();
 
-  const handleAddCurriculo = (curriculo) => {
-    setCurriculos((prevCurriculos) => [...prevCurriculos, curriculo]);
+  // Carregar dados persistidos ao montar o componente
+  useEffect(() => {
+    loadCurriculos();
+  }, []);
+
+  // Salvar currículos no AsyncStorage
+  const saveCurriculos = async (data) => {
+    try {
+      await AsyncStorage.setItem('@curriculos', JSON.stringify(data));
+    } catch (error) {
+      console.error('Erro ao salvar currículos:', error);
+    }
+  };
+
+  // Carregar currículos do AsyncStorage
+  const loadCurriculos = async () => {
+    try {
+      const storedData = await AsyncStorage.getItem('@curriculos');
+      if (storedData) {
+        setCurriculos(JSON.parse(storedData));
+      }
+    } catch (error) {
+      console.error('Erro ao carregar currículos:', error);
+    }
+  };
+
+  // Adicionar novo currículo
+  const addCurriculo = (data) => {
+    const updatedCurriculos = [...curriculos, { ...data, id: Date.now().toString() }];
+    setCurriculos(updatedCurriculos);
+    saveCurriculos(updatedCurriculos); // Atualizar AsyncStorage
   };
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Criar Currículo"
-        onPress={() => navigation.navigate('CriarCurriculo', { onSave: handleAddCurriculo })}
-      />
       <FlatList
         data={curriculos}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate('VisualizarCurriculo', { curriculo: item })}>
-            <Text style={styles.curriculoItem}>{item.name}</Text>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => navigation.navigate('VisualizarCurriculo', { curriculo: item })}
+          >
+            <Text>{item.name}</Text>
           </TouchableOpacity>
         )}
+      />
+      <Button
+        title="Criar Novo Currículo"
+        onPress={() => navigation.navigate('CriarCurriculo', { onSave: addCurriculo })}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20 },
-  curriculoItem: { fontSize: 18, marginVertical: 10 },
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  item: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+  },
 });
