@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
@@ -38,6 +38,18 @@ export default function CurriculosCriados() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.greeting}>Olá!</Text>
+        <Text style={styles.welcome}>Bem vindo(a) ao</Text>
+        <Text style={styles.appName}>CV Builder+</Text>
+      </View>
+
+      <Image
+        source={{ uri: 'https://i.imgur.com/8JcoGA3.png' }}
+        style={styles.image}
+      />
+
+      {/* Lista de currículos */}
       <FlatList
         data={curriculos}
         keyExtractor={(item) => item.id}
@@ -46,14 +58,21 @@ export default function CurriculosCriados() {
             style={styles.item}
             onPress={() => navigation.navigate('VisualizarCurriculo', { curriculo: item })}
           >
-            <Text>{item.name}</Text>
+            <Text style={styles.itemText}>{item.name}</Text>
           </TouchableOpacity>
         )}
+        ListEmptyComponent={() => (
+          <Text style={styles.emptyText}>Nenhum currículo criado ainda.</Text>
+        )}
       />
-      <Button
-        title="Criar Novo Currículo"
+
+      {/* Botão flutuante */}
+      <TouchableOpacity
+        style={styles.floatingButton}
         onPress={() => navigation.navigate('CriarCurriculo', { onSave: addCurriculo })}
-      />
+      >
+        <Text style={styles.floatingButtonText}>+</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -61,11 +80,82 @@ export default function CurriculosCriados() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    backgroundColor: '#F5F5F5',
+  },
+  header: {
+    backgroundColor: '#14614E', // Fundo verde
+    paddingVertical: 30,
+    paddingHorizontal: 20,
+    borderBottomLeftRadius: 30, // Canto arredondado na base
+    borderBottomRightRadius: 30,
+    alignItems: 'flex-start',
+  },
+  greeting: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFFFFF', // Texto branco
+    marginBottom: 5,
+  },
+  welcome: {
+    fontSize: 20,
+    color: '#FFFFFF', // Texto branco
+    marginBottom: 5,
+  },
+  appName: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#C47026', // Texto laranja
+  },
+  imageContainer: {
+    alignItems: 'center', // Centraliza horizontalmente
+    marginTop: -40, // Posiciona a imagem parcialmente sobre o cabeçalho
+  },
+  image: {
+    width: 200, // Largura ajustada
+    height: 300, // Altura ajustada
+    resizeMode: 'contain', // Mantém proporção
+  },
+  emptyText: {
+    color: '#333',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  listContainer: {
+    flex: 1,
+    marginTop: 20,
+    alignItems: 'center',
   },
   item: {
-    padding: 15,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
+    backgroundColor: '#C47026', // Fundo laranja
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginVertical: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+  itemText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  floatingButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: '#C47026',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+  },
+  floatingButtonText: {
+    color: '#FFF',
+    fontSize: 30,
+    fontWeight: 'bold',
   },
 });
+
