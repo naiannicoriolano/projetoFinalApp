@@ -1,13 +1,13 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Text, TextInput, Button, StyleSheet, ScrollView, KeyboardAvoidingView, Platform} from 'react-native';
+import { Text, TextInput, Button, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, View , TouchableOpacity} from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function CriarCurriculo() {
   const { control, handleSubmit, reset } = useForm();
   const navigation = useNavigation();
   const route = useRoute();
-  const onSave = route?.params?.onSave || (() => {});
+  const onSave = route?.params?.onSave || (() => { });
 
   const onSubmit = (data) => {
     onSave(data);
@@ -139,7 +139,11 @@ export default function CriarCurriculo() {
           )}
         />
 
-        <Button title="Salvar Currículo" onPress={handleSubmit(onSubmit)} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
+            <Text style={styles.buttonText}>Salvar Currículo</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -148,25 +152,59 @@ export default function CriarCurriculo() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: '#F5F5F5',
+    flexGrow: 1,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#14614E',
   },
   label: {
     marginTop: 15,
     marginBottom: 5,
     fontWeight: 'bold',
+    fontSize: 16,
+    color: '#333',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
+    backgroundColor: '#FFF',
+    fontSize: 16,
     marginBottom: 10,
   },
   textarea: {
-    height: 80,
+    height: 100,
     textAlignVertical: 'top',
   },
   error: {
     color: 'red',
+    fontSize: 14,
+    marginTop: -5,
     marginBottom: 10,
+  },
+  buttonContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#FF6A00',
+    paddingVertical: 15,
+    paddingHorizontal: 50,
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });

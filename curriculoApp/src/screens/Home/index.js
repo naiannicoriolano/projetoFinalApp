@@ -49,7 +49,6 @@ export default function CurriculosCriados() {
         style={styles.image}
       />
 
-      {/* Lista de currículos */}
       <FlatList
         data={curriculos}
         keyExtractor={(item) => item.id}
@@ -66,7 +65,6 @@ export default function CurriculosCriados() {
         )}
       />
 
-      {/* Botão flutuante */}
       <TouchableOpacity
         style={styles.floatingButton}
         onPress={() => navigation.navigate('CriarCurriculo', { onSave: addCurriculo })}
@@ -76,44 +74,48 @@ export default function CurriculosCriados() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
   header: {
-    backgroundColor: '#14614E', // Fundo verde
-    paddingVertical: 30,
+    backgroundColor: '#14614E', 
+    paddingVertical: 100,
     paddingHorizontal: 20,
-    borderBottomLeftRadius: 30, // Canto arredondado na base
-    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 0, 
+    borderBottomRightRadius: 40,
     alignItems: 'flex-start',
   },
   greeting: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#FFFFFF', // Texto branco
-    marginBottom: 5,
+    color: '#FFFFFF', 
+    marginBottom: 30,
+    marginTop: -20,
+
   },
   welcome: {
-    fontSize: 20,
-    color: '#FFFFFF', // Texto branco
+    fontSize: 28,
+    color: '#FFFFFF',
     marginBottom: 5,
   },
   appName: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#C47026', // Texto laranja
+    color: '#C47026',
   },
   imageContainer: {
+    flex: 1, // Preenche o espaço disponível
+    justifyContent: 'center', // Centraliza verticalmente
     alignItems: 'center', // Centraliza horizontalmente
-    marginTop: -40, // Posiciona a imagem parcialmente sobre o cabeçalho
+    marginTop: -50, // Ajuste para sobrepor um pouco o cabeçalho
   },
   image: {
-    width: 200, // Largura ajustada
-    height: 300, // Altura ajustada
+    width: 600, // Largura ajustada
+    height: 350, // Altura ajustada
     resizeMode: 'contain', // Mantém proporção
+    marginTop: -250, // Ajuste para sobrepor um pouco o cabeçalho
   },
   emptyText: {
     color: '#333',
@@ -158,4 +160,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-

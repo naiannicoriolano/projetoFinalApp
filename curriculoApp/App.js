@@ -28,7 +28,7 @@ export default function App() {
           <Stack.Screen
             name="CurriculosCriados"
             component={Home}
-            options={{ title: 'Home' }}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="CriarCurriculo"
