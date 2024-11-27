@@ -7,12 +7,10 @@ export default function CurriculosCriados() {
   const [curriculos, setCurriculos] = useState([]);
   const navigation = useNavigation();
 
-  // Carregar dados persistidos ao montar o componente
   useEffect(() => {
     loadCurriculos();
   }, []);
 
-  // Salvar currículos no AsyncStorage
   const saveCurriculos = async (data) => {
     try {
       await AsyncStorage.setItem('@curriculos', JSON.stringify(data));
@@ -21,7 +19,6 @@ export default function CurriculosCriados() {
     }
   };
 
-  // Carregar currículos do AsyncStorage
   const loadCurriculos = async () => {
     try {
       const storedData = await AsyncStorage.getItem('@curriculos');
@@ -33,11 +30,10 @@ export default function CurriculosCriados() {
     }
   };
 
-  // Adicionar novo currículo
   const addCurriculo = (data) => {
     const updatedCurriculos = [...curriculos, { ...data, id: Date.now().toString() }];
     setCurriculos(updatedCurriculos);
-    saveCurriculos(updatedCurriculos); // Atualizar AsyncStorage
+    saveCurriculos(updatedCurriculos);
   };
 
   return (
