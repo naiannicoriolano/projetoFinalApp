@@ -33,12 +33,12 @@ export default function App() {
           <Stack.Screen
             name="CriarCurriculo"
             component={CriarCurriculo}
-            options={{ title: 'Criar Currículo' }}
+            options={{ title: '' }}
           />
           <Stack.Screen
             name="VisualizarCurriculo"
             component={VisualizarCurriculo}
-            options={{ title: 'Visualizar Currículo' }}
+            options={{ title: '' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

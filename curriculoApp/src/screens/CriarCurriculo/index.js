@@ -21,6 +21,7 @@ export default function CriarCurriculo() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Criar Currículo</Text>
         <Text style={styles.label}>Nome:</Text>
         <Controller
           control={control}
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 10,
     color: '#14614E',
   },
   label: {

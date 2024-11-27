@@ -106,16 +106,16 @@ const styles = StyleSheet.create({
     color: '#C47026',
   },
   imageContainer: {
-    flex: 1, // Preenche o espaço disponível
-    justifyContent: 'center', // Centraliza verticalmente
-    alignItems: 'center', // Centraliza horizontalmente
-    marginTop: -50, // Ajuste para sobrepor um pouco o cabeçalho
+    flex: 1,
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    marginTop: -50, 
   },
   image: {
-    width: 600, // Largura ajustada
-    height: 350, // Altura ajustada
-    resizeMode: 'contain', // Mantém proporção
-    marginTop: -250, // Ajuste para sobrepor um pouco o cabeçalho
+    width: 600, 
+    height: 350,
+    resizeMode: 'contain', 
+    marginTop: -250, 
   },
   emptyText: {
     color: '#333',
@@ -129,13 +129,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    backgroundColor: '#C47026', // Fundo laranja
+    backgroundColor: '#C47026', 
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
     marginVertical: 10,
-    width: '80%',
+    width: '60%',
     alignItems: 'center',
+    marginLeft: 75,
   },
   itemText: {
     color: '#FFF',
