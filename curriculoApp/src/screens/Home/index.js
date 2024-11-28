@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     marginTop: -50, 
   },
   image: {
-    width: 600, 
+    width: 620, 
     height: 350,
     resizeMode: 'contain', 
     marginTop: -250, 
