@@ -33,7 +33,10 @@ export default function App() {
           <Stack.Screen
             name="CriarCurriculo"
             component={CriarCurriculo}
-            options={{ title: '' }}
+            options={{ title: '', 
+            headerBackTitle: 'Voltar', 
+          }}
+            
           />
           <Stack.Screen
             name="VisualizarCurriculo"
